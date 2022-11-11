@@ -1,0 +1,95 @@
+using System;
+using System.Net.NetworkInformation;
+start:
+Console.Clear();
+
+int a = 0, b = 0, dzialanie = 0, liczba = 0;
+decimal wynik = 0;
+string Uruchom = "n";
+
+Console.WriteLine("Witaj w kalkulatorze Mateusza\n\n");
+Console.WriteLine("Podaj pierwszą liczbę");
+a = Convert.ToInt32(Console.ReadLine());
+
+Console.WriteLine("Podaj drugą liczbę");
+b = Convert.ToInt32(Console.ReadLine());
+
+Console.WriteLine("Które działanie mam wykonać:");
+Console.WriteLine("1: Dodawanie \n2: Odejmowanie. \n3: Mnożenie. \n4: Dzielenie. \n5: Wartość procentowa liczb. \n6: Kwadrat wybranej liczby. \n7: Pierwiastek wybranej liczby. \n");
+dzialanie = Convert.ToInt32(Console.ReadLine());
+switch (dzialanie)
+{
+    case 1:
+        wynik = a + b;
+        Console.WriteLine("Wynik dodawania wskazanych liczb: " + wynik);
+        break;
+
+    case 2:
+        wynik = a - b;
+        Console.WriteLine("Wynik odejmowania wskazanych liczb: " + wynik);
+        break;
+
+    case 3:
+        wynik = a * b;
+        Console.WriteLine("Wynik mnożenia wskazanych liczb: " + wynik);
+        break;
+
+    case 4:
+        if (b == 0)
+        {
+            Console.WriteLine("Nie można dzielić przez zero");
+            break;
+        }
+        else
+        {
+            wynik = a / b;
+        }
+        Console.WriteLine("Wynik dzielenia wskazanych liczb: " + wynik);
+        break;
+
+    case 5:
+        wynik = (b * 100) / a;
+        Console.WriteLine("Liczba " + b + " to " + wynik + "% liczby " + a);
+        wynik = (a * 100) / b;
+        Console.WriteLine("Liczba " + a + " to " + wynik + "% liczby " + b);
+        break;
+
+    case 6:
+        Console.WriteLine("Którą liczbczę chcesz podnieść do potęgi: Pierwszą-1 czy Drugą-2?");
+        liczba = Convert.ToInt32(Console.ReadLine());
+        if (liczba == 1)
+        {
+            Console.WriteLine("Liczba pierwsza podniesiona do potęgi to " + Math.Pow(a, 2));
+        }
+        else
+        {
+            Console.WriteLine("Liczba druga podniesiona do potęgi to " + Math.Pow(b, 2));
+        }
+        break;
+
+    case 7:
+        Console.WriteLine("Pierwiastek której liczby chcesz uzyskać? Pierwszej-1 czy Drugiej-2?");
+        liczba = Convert.ToInt32(Console.ReadLine());
+        if (liczba == 1)
+        {
+            Console.WriteLine("Pierwiastek z wybranej liczby to " + Math.Sqrt(a));
+        }
+        else
+        {
+            Console.WriteLine("Pierwiastek z wybranej liczby to " + Math.Sqrt(b));
+        }
+        break;
+
+    default:
+        Console.WriteLine("Wybrałeś opcję, której nie mogę zrealizować");
+        break;
+}
+
+Console.WriteLine("\n");
+Console.WriteLine("Czy uruchomić ponownie Kalkulator? Tak - t / Nie - n.");
+Uruchom = Console.ReadLine();
+
+if (Uruchom == "t")
+{
+    goto start;
+}
