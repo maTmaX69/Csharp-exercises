@@ -1,0 +1,34 @@
+//Zadanie numer 1//
+Console.WriteLine("Dzień dobry, poniżej liczby z zakresu 10 do 35:\n");
+    int Liczby = 10;
+    while (Liczby <=35)
+    {
+Console.WriteLine($"{Liczby}");
+    Liczby++;
+    }
+//Zadanie numer 2//
+Console.WriteLine("\nPodaj liczbę całkowitą n by program mógł obliczyć wartość n!.\n");
+    long Liczba, Silnia = 1;
+    Liczba = Convert.ToInt64(Console.ReadLine());
+    {
+    for (long i = 1; i <= Liczba; i++)
+    Silnia*= i;
+Console.WriteLine("\nSilnia liczby " + Liczba + " to " +Silnia);
+    }
+//Zadanie numer 3//
+Console.WriteLine("\nPodaj długość boku kwadratu, by program mógł go wydrukować :) \n");
+    int liczba = Convert.ToInt32(Console.ReadLine());
+    for (int y = 1; y <= liczba; y++)
+    {
+    for (int x = 1; x <= liczba; x++)
+    {
+
+
+Console.Write("K");
+    }
+Console.WriteLine("");
+    }
+    {
+Console.ReadKey();
+    }
+//Koniec//
