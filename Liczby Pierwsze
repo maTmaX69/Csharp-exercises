@@ -1,0 +1,42 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace Zadanie3
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Clear();
+            Console.WriteLine("Witaj! Program podpowie Ci, czy masz do czynienia z liczbą pierwszą :)\n");
+            Console.WriteLine("Podaj liczbę naturalną:");
+            int a = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Twoja liczba {0}{1} jest liczbą pierwszą!", a, (LiczbaPierwsza(a) ? "" : " nie"));
+            Console.WriteLine("\nWciśnij dowolny przycisk by powtórzyć :)");
+            Console.ReadKey();
+            Main(args);
+        }
+
+        static bool LiczbaPierwsza(int a)
+        {
+            if (a <= 1) return false;
+            if (a == 2) return true;
+            int b = (int)Math.Ceiling(Math.Sqrt(a));
+            return Petla(2, b, a);
+        }
+
+        static bool Petla(int i, int b, int a)
+        {
+            if (a % i == 0) return false;
+            if (i <= b)
+            {
+                i++;
+            }
+            return true;
+        }
+    }
+}
