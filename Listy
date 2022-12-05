@@ -1,0 +1,77 @@
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.Metrics;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace Zadanie5
+{
+    class Listy
+    {
+        static void Main(string[] args)
+        {
+            {
+                {
+                reset:
+                    Console.Clear();
+                    Console.WriteLine("----------------MENU----------------");
+                    Console.WriteLine("1.Lista imion i nazwisk - PEŁNA.\n2.Wszystkie kobiety o imieniu Anna.\n3.Pokaż mi wiersz 246.\n4.Wyjdź z programu.");
+
+                    bool liczba = int.TryParse(Console.ReadLine(), out int m);
+                    if (liczba)
+                    {
+
+                        switch (m)
+                        {
+                            case 1:
+                                {
+                                    string tekst = File.ReadAllText("listy.txt");
+                                    string[] linie = File.ReadAllLines("listy.txt");
+                                    foreach (string linia in linie)
+                                    {
+                                        Console.WriteLine("\t" + linia);
+                                    }
+                                    break;
+                                }
+                            case 2:
+                                {
+                                    string tekst = File.ReadAllText("listy.txt");
+                                    string[] linie = File.ReadAllLines("listy.txt");
+                                    foreach (string linia in linie)
+                                    {
+                                        List<string> imie_nazwisko = File.ReadAllLines("listy.txt").ToList();
+                                        var sprawdz = imie_nazwisko.ToLookup(x => x.Split()[0]);
+                                        var wgA = sprawdz["Anna"];
+                                        foreach (var anna in wgA)
+                                        {
+                                            Console.WriteLine(anna);
+                                        }
+                                        Console.WriteLine("Wciśnij dowolny klawisz by wrócić do menu.");
+                                        Console.ReadKey();
+                                        goto reset;
+                                    }
+                                    break;
+                                }
+                            case 3:
+                                string pozycja246 = File.ReadLines("listy.txt").Skip(245).Take(1).First();
+                                Console.WriteLine(pozycja246);
+                                break;
+                            case 4:
+                                Environment.Exit(0);
+                                break;
+                            default:
+                                Console.WriteLine("Wybrałeś opcję, której nie mogę zrealizować.");
+                                Console.ReadKey();
+                                break;
+                        }
+                    }
+                    Console.WriteLine("Wybrałeś opcję, której nie mogę zrealizować.");
+                    Console.ReadKey();
+                    goto reset;
+                }
+            }
+        }
+    }
+}
