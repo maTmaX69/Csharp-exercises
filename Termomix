@@ -1,0 +1,639 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace TERMOCIASTO
+{
+    public class Program
+    {
+        static List<string> cake = new List<string>() { "Murzynek", "Szarlotka", "Karpatka", "Sernik", "Makowiec", "Kremówki" };
+
+        public static void Main(string[] args)
+        {
+            refresh();
+            //Menu.
+            static void menu()
+            {
+                Console.WriteLine("----------MENU----TERMOCAKE----------");
+                Console.WriteLine("1. Cake list.\n2. Add the cake.\n3. Edit cake.\n4. Remove the cake.\n5. Exit.");
+                Console.WriteLine("-------------------------------------");
+                choice();
+            }
+            //Wybór.
+            static void choice()
+            {
+                bool a = int.TryParse(Console.ReadLine(), out int a1);
+
+                if (a)
+                {
+                    switch (a1)
+                    {
+                        case 1:
+                            cakeList();
+                            break;
+                        case 2:
+                            addCake();
+                            break;
+                        case 3:
+                            editCake();
+                            break;
+                        case 4:
+                            removeCake();
+                            break;
+                        case 5:
+                            Environment.Exit(0);
+                            break;
+                        default:
+                            Console.WriteLine("Wybrałeś opcję, której nie mogę zrealizować.");
+                            Console.ReadKey();
+                            refresh();
+                            break;
+                    }
+                }
+                else
+                {
+                    refresh();
+                }
+            }
+            //Lista ciast.
+            static void cakeList()
+            {
+                Console.Clear();
+                Console.WriteLine("Na jakie ciasto masz dziś ochotę? :)\n");
+                foreach (string item in cake)
+                {
+                    Console.WriteLine(cake.IndexOf(item) + " " + item.ToUpper());
+                }
+
+                bool b = int.TryParse(Console.ReadLine(), out int b1);
+                if (b)
+                {
+
+                    switch (b1)
+                    {
+                        case 0:
+                            recipe00();
+                            break;
+                        case 1:
+                            recipe11();
+                            break;
+                        case 2:
+                            recipe22();
+                            break;
+                        case 3:
+                            recipe33();
+                            break;
+                        case 4:
+                            recipe44();
+                            break;
+                        case 5:
+                            recipe55();
+                            break;
+                        case 6:
+                            Console.WriteLine("System ściąga z internetu przepis - poczekaj sekundę :)");
+                            Console.WriteLine("Naciśnij dowolny klawisz by kontynuować.");
+                            Console.ReadKey();
+                            recipe66();
+                            break;
+                        default:
+                            Console.WriteLine("Program nie rozumie polecania. Wracam do menu :)");
+                            Console.ReadKey();
+                            refresh();
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Program nie rozumie polecania. Wracam do menu :)");
+                    Console.ReadKey();
+                    refresh();
+                }
+            }
+            //Dodawanie pozycji.
+            static void addCake()
+            {
+                Console.Clear();
+                Console.WriteLine("Podaj nazwę swojego ciasta: ");
+                string noweCiasto = Console.ReadLine();
+                Console.WriteLine("Dodałem nowe ciasto do listy.");
+                cake.Add(noweCiasto);
+                Console.WriteLine("1. Cofnij.");
+                Console.ReadKey();
+                refresh();
+            }
+            //Edycja pozycji.
+            static void editCake()
+            {
+                Console.WriteLine("Podaj numer ciasta do edycji: ");
+                int edytowaneCiasto = int.Parse(Console.ReadLine());
+                Console.WriteLine("Podaj nową nazwę ciasta: ");
+                string nowaNazwa = Console.ReadLine();
+                cake[edytowaneCiasto] = nowaNazwa;
+                Console.WriteLine("1. Cofnij.");
+                Console.ReadKey();
+                refresh();
+            }
+            //Usuwanie pozycji.
+            static void removeCake()
+            {
+                Console.WriteLine("Podaj numer ciasta do usunięcia: ");
+                int usuwaneCiasto = int.Parse(Console.ReadLine());
+                cake.RemoveAt(usuwaneCiasto);
+                refresh();
+            }
+            //Odświeżanie.
+            static void refresh()
+            {
+                Console.Clear();
+                menu();
+                Console.ReadKey();
+            }
+            //Przepis na Murzynka.
+            static void recipe00()
+            {
+                Console.Clear();
+                Recipe recipe0;
+                recipe0.name = "Murzynek";
+                Console.WriteLine("Wybrałeś przepis na {0} - powodzenia :)\n", recipe0.name);
+                recipe0.FlourName = "Mąka";
+                recipe0.ButterName = "Masło";
+                recipe0.SugarName = "Cukier";
+                recipe0.EggName = "Jajka";
+                recipe0.FlourWeight = 200;
+                recipe0.ButterWeight = 100;
+                recipe0.SugarWeight = 70;
+                recipe0.NumberOfEgg = 3;
+                recipe0.decorate = "posypką";
+                recipe0.mix = "Wymieszaj";
+                recipe0.add = "wrzuć";
+                recipe0.time = 50;
+                recipe0.temp = 180;
+
+                Console.WriteLine("1. Składniki.\n2. Przygotowanie.\n3. Dekoracja.\n4. Menu Główne.");
+
+                bool c = int.TryParse(Console.ReadLine(), out int c1);
+                if (c)
+                {
+                    switch (c1)
+                    {
+                        case 1:
+
+                            Console.Clear();
+                            Console.WriteLine("\nSkładniki:");
+                            Console.WriteLine("\n{0}: {1} gram. {2}: {3} gram. {4}: {5} gram. {6}: {7} szt.", recipe0.FlourName, recipe0.FlourWeight, recipe0.ButterName, recipe0.ButterWeight, recipe0.SugarName, recipe0.SugarWeight, recipe0.EggName, recipe0.NumberOfEgg);
+                            Console.WriteLine("\n1. Cofnij.");
+                            Console.ReadKey();
+                            recipe00();
+                            break;
+                        case 2:
+                            Console.Clear();
+                            Console.WriteLine("\nDo miski {0}: {1}, {2} i {3} oraz rozbite {4}.", recipe0.add, recipe0.FlourName, recipe0.ButterName, recipe0.SugarName, recipe0.EggName);
+                            Console.WriteLine("\n{0} wszystkie składniki.", recipe0.mix);
+                            Console.WriteLine("\nPrzelej do foremki i wrzuć do piekarnika rozgrznego do {0} stopni na {1} minut.", recipe0.temp, recipe0.time);
+                            Console.WriteLine("\n1. Cofnij.");
+                            Console.ReadKey();
+                            recipe00();
+                            break;
+                        case 3:
+                            Console.Clear();
+                            Console.WriteLine("\nPo wychłodzeniu przystąp do dekoracji swojego {0}.", recipe0.name);
+                            Console.WriteLine("\nPosyp ciasto {0} swoją ulubioną {1}. SMACZNEGO :)", recipe0.name, recipe0.decorate);
+                            Console.WriteLine("\n1. Cofnij.");
+                            Console.ReadKey();
+                            recipe00();
+                            break;
+                        case 4:
+                            refresh();
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Program nie rozumie polecania. Wracam do menu :)");
+                    Console.ReadKey();
+                    refresh();
+                }
+            }
+            //Przepis na Szarlotkę.
+            static void recipe11()
+            {
+                Console.Clear();
+                Recipe recipe1;
+                recipe1.name = "Szarlotka";
+                Console.WriteLine("Wybrałeś przepis na {0} - powodzenia :)\n", recipe1.name);
+                recipe1.FlourName = "Mąka";
+                recipe1.ButterName = "Masło";
+                recipe1.SugarName = "Cukier";
+                recipe1.EggName = "Jajka";
+                recipe1.FlourWeight = 300;
+                recipe1.ButterWeight = 200;
+                recipe1.SugarWeight = 100;
+                recipe1.NumberOfEgg = 4;
+                recipe1.decorate = "posypką";
+                recipe1.mix = "Wymieszaj";
+                recipe1.add = "wrzuć";
+                recipe1.time = 80;
+                recipe1.temp = 200;
+
+                Console.WriteLine("1. Składniki.\n2. Przygotowanie.\n3. Dekoracja.\n4. Menu Główne.");
+
+                bool c = int.TryParse(Console.ReadLine(), out int c1);
+                if (c)
+                {
+                    switch (c1)
+                    {
+                        case 1:
+
+                            Console.Clear();
+                            Console.WriteLine("\nSkładniki:");
+                            Console.WriteLine("\n{0}: {1} gram. {2}: {3} gram. {4}: {5} gram. {6}: {7} szt.", recipe1.FlourName, recipe1.FlourWeight, recipe1.ButterName, recipe1.ButterWeight, recipe1.SugarName, recipe1.SugarWeight, recipe1.EggName, recipe1.NumberOfEgg);
+                            Console.WriteLine("\n1. Cofnij.");
+                            Console.ReadKey();
+                            recipe11();
+                            break;
+                        case 2:
+                            Console.Clear();
+                            Console.WriteLine("\nDo miski {0}: {1}, {2} i {3} oraz rozbite {4}.", recipe1.add, recipe1.FlourName, recipe1.ButterName, recipe1.SugarName, recipe1.EggName);
+                            Console.WriteLine("\n{0} wszystkie składniki.", recipe1.mix);
+                            Console.WriteLine("\nPrzelej do foremki i wrzuć do piekarnika rozgrznego do {0} stopni na {1} minut.", recipe1.temp, recipe1.time);
+                            Console.WriteLine("\n1. Cofnij.");
+                            Console.ReadKey();
+                            recipe11();
+                            break;
+                        case 3:
+                            Console.Clear();
+                            Console.WriteLine("\nPo wychłodzeniu przystąp do dekoracji swojego {0}.", recipe1.name);
+                            Console.WriteLine("\nPosyp ciasto {0} swoją ulubioną {1}. SMACZNEGO :)", recipe1.name, recipe1.decorate);
+                            Console.WriteLine("\n1. Cofnij.");
+                            Console.ReadKey();
+                            recipe11();
+                            break;
+                        case 4:
+                            refresh();
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Program nie rozumie polecania. Wracam do menu :)");
+                    Console.ReadKey();
+                    refresh();
+                }
+
+            }
+            //Przepis na Karpatkę.
+            static void recipe22()
+            {
+                Console.Clear();
+                Recipe recipe2;
+                recipe2.name = "Karpatka";
+                Console.WriteLine("Wybrałeś przepis na {0} - powodzenia :)\n", recipe2.name);
+                recipe2.FlourName = "Mąka";
+                recipe2.ButterName = "Masło";
+                recipe2.SugarName = "Cukier";
+                recipe2.EggName = "Jajka";
+                recipe2.FlourWeight = 400;
+                recipe2.ButterWeight = 120;
+                recipe2.SugarWeight = 80;
+                recipe2.NumberOfEgg = 2;
+                recipe2.decorate = "posypką";
+                recipe2.mix = "Wymieszaj";
+                recipe2.add = "wrzuć";
+                recipe2.time = 70;
+                recipe2.temp = 190;
+
+                Console.WriteLine("1. Składniki.\n2. Przygotowanie.\n3. Dekoracja.\n4. Menu Główne.");
+
+                bool c = int.TryParse(Console.ReadLine(), out int c1);
+                if (c)
+                {
+                    switch (c1)
+                    {
+                        case 1:
+
+                            Console.Clear();
+                            Console.WriteLine("\nSkładniki:");
+                            Console.WriteLine("\n{0}: {1} gram. {2}: {3} gram. {4}: {5} gram. {6}: {7} szt.", recipe2.FlourName, recipe2.FlourWeight, recipe2.ButterName, recipe2.ButterWeight, recipe2.SugarName, recipe2.SugarWeight, recipe2.EggName, recipe2.NumberOfEgg);
+                            Console.WriteLine("\n1. Cofnij.");
+                            Console.ReadKey();
+                            recipe22();
+                            break;
+                        case 2:
+                            Console.Clear();
+                            Console.WriteLine("\nDo miski {0}: {1}, {2} i {3} oraz rozbite {4}.", recipe2.add, recipe2.FlourName, recipe2.ButterName, recipe2.SugarName, recipe2.EggName);
+                            Console.WriteLine("\n{0} wszystkie składniki.", recipe2.mix);
+                            Console.WriteLine("\nPrzelej do foremki i wrzuć do piekarnika rozgrznego do {0} stopni na {1} minut.", recipe2.temp, recipe2.time);
+                            Console.WriteLine("\n1. Cofnij.");
+                            Console.ReadKey();
+                            recipe22();
+                            break;
+                        case 3:
+                            Console.Clear();
+                            Console.WriteLine("\nPo wychłodzeniu przystąp do dekoracji swojego {0}.", recipe2.name);
+                            Console.WriteLine("\nPosyp ciasto {0} swoją ulubioną {1}. SMACZNEGO :)", recipe2.name, recipe2.decorate);
+                            Console.WriteLine("\n1. Cofnij.");
+                            Console.ReadKey();
+                            recipe22();
+                            break;
+                        case 4:
+                            refresh();
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Program nie rozumie polecania. Wracam do menu :)");
+                    Console.ReadKey();
+                    refresh();
+                }
+
+            }
+            //Przepis na Sernik.
+            static void recipe33()
+            {
+                Console.Clear();
+                Recipe recipe3;
+                recipe3.name = "Sernik";
+                Console.WriteLine("Wybrałeś przepis na {0} - powodzenia :)\n", recipe3.name);
+                recipe3.FlourName = "Mąka";
+                recipe3.ButterName = "Masło";
+                recipe3.SugarName = "Cukier";
+                recipe3.EggName = "Jajka";
+                recipe3.FlourWeight = 220;
+                recipe3.ButterWeight = 180;
+                recipe3.SugarWeight = 120;
+                recipe3.NumberOfEgg = 8;
+                recipe3.decorate = "posypką";
+                recipe3.mix = "Wymieszaj";
+                recipe3.add = "wrzuć";
+                recipe3.time = 90;
+                recipe3.temp = 220;
+
+                Console.WriteLine("1. Składniki.\n2. Przygotowanie.\n3. Dekoracja.\n4. Menu Główne.");
+
+                bool c = int.TryParse(Console.ReadLine(), out int c1);
+                if (c)
+                {
+                    switch (c1)
+                    {
+                        case 1:
+
+                            Console.Clear();
+                            Console.WriteLine("\nSkładniki:");
+                            Console.WriteLine("\n{0}: {1} gram. {2}: {3} gram. {4}: {5} gram. {6}: {7} szt.", recipe3.FlourName, recipe3.FlourWeight, recipe3.ButterName, recipe3.ButterWeight, recipe3.SugarName, recipe3.SugarWeight, recipe3.EggName, recipe3.NumberOfEgg);
+                            Console.WriteLine("\n1. Cofnij.");
+                            Console.ReadKey();
+                            recipe33();
+                            break;
+                        case 2:
+                            Console.Clear();
+                            Console.WriteLine("\nDo miski {0}: {1}, {2} i {3} oraz rozbite {4}.", recipe3.add, recipe3.FlourName, recipe3.ButterName, recipe3.SugarName, recipe3.EggName);
+                            Console.WriteLine("\n{0} wszystkie składniki.", recipe3.mix);
+                            Console.WriteLine("\nPrzelej do foremki i wrzuć do piekarnika rozgrznego do {0} stopni na {1} minut.", recipe3.temp, recipe3.time);
+                            Console.WriteLine("\n1. Cofnij.");
+                            Console.ReadKey();
+                            recipe33();
+                            break;
+                        case 3:
+                            Console.Clear();
+                            Console.WriteLine("\nPo wychłodzeniu przystąp do dekoracji swojego {0}.", recipe3.name);
+                            Console.WriteLine("\nPosyp ciasto {0} swoją ulubioną {1}. SMACZNEGO :)", recipe3.name, recipe3.decorate);
+                            Console.WriteLine("\n1. Cofnij.");
+                            Console.ReadKey();
+                            recipe33();
+                            break;
+                        case 4:
+                            refresh();
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Program nie rozumie polecania. Wracam do menu :)");
+                    Console.ReadKey();
+                    refresh();
+                }
+
+            }
+            //Przepis na Makowiec.
+            static void recipe44()
+            {
+                Console.Clear();
+                Recipe recipe4;
+                recipe4.name = "Makowiec";
+                Console.WriteLine("Wybrałeś przepis na {0} - powodzenia :)\n", recipe4.name);
+                recipe4.FlourName = "Mąka";
+                recipe4.ButterName = "Masło";
+                recipe4.SugarName = "Cukier";
+                recipe4.EggName = "Jajka";
+                recipe4.FlourWeight = 320;
+                recipe4.ButterWeight = 150;
+                recipe4.SugarWeight = 100;
+                recipe4.NumberOfEgg = 3;
+                recipe4.decorate = "posypką";
+                recipe4.mix = "Wymieszaj";
+                recipe4.add = "wrzuć";
+                recipe4.time = 50;
+                recipe4.temp = 230;
+
+                Console.WriteLine("1. Składniki.\n2. Przygotowanie.\n3. Dekoracja.\n4. Menu Główne.");
+
+                bool c = int.TryParse(Console.ReadLine(), out int c1);
+                if (c)
+                {
+                    switch (c1)
+                    {
+                        case 1:
+
+                            Console.Clear();
+                            Console.WriteLine("\nSkładniki:");
+                            Console.WriteLine("\n{0}: {1} gram. {2}: {3} gram. {4}: {5} gram. {6}: {7} szt.", recipe4.FlourName, recipe4.FlourWeight, recipe4.ButterName, recipe4.ButterWeight, recipe4.SugarName, recipe4.SugarWeight, recipe4.EggName, recipe4.NumberOfEgg);
+                            Console.WriteLine("\n1. Cofnij.");
+                            Console.ReadKey();
+                            recipe44();
+                            break;
+                        case 2:
+                            Console.Clear();
+                            Console.WriteLine("\nDo miski {0}: {1}, {2} i {3} oraz rozbite {4}.", recipe4.add, recipe4.FlourName, recipe4.ButterName, recipe4.SugarName, recipe4.EggName);
+                            Console.WriteLine("\n{0} wszystkie składniki.", recipe4.mix);
+                            Console.WriteLine("\nPrzelej do foremki i wrzuć do piekarnika rozgrznego do {0} stopni na {1} minut.", recipe4.temp, recipe4.time);
+                            Console.WriteLine("\n1. Cofnij.");
+                            Console.ReadKey();
+                            recipe44();
+                            break;
+                        case 3:
+                            Console.Clear();
+                            Console.WriteLine("\nPo wychłodzeniu przystąp do dekoracji swojego {0}.", recipe4.name);
+                            Console.WriteLine("\nPosyp ciasto {0} swoją ulubioną {1}. SMACZNEGO :)", recipe4.name, recipe4.decorate);
+                            Console.WriteLine("\n1. Cofnij.");
+                            Console.ReadKey();
+                            recipe44();
+                            break;
+                        case 4:
+                            refresh();
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Program nie rozumie polecania. Wracam do menu :)");
+                    Console.ReadKey();
+                    refresh();
+                }
+
+            }
+            //Przepis na Kremówki.
+            static void recipe55()
+            {
+                Console.Clear();
+                Recipe recipe5;
+                recipe5.name = "Kremówki";
+                Console.WriteLine("Wybrałeś przepis na {0} - powodzenia :)\n", recipe5.name);
+                recipe5.FlourName = "Mąka";
+                recipe5.ButterName = "Masło";
+                recipe5.SugarName = "Cukier";
+                recipe5.EggName = "Jajka";
+                recipe5.FlourWeight = 320;
+                recipe5.ButterWeight = 150;
+                recipe5.SugarWeight = 100;
+                recipe5.NumberOfEgg = 3;
+                recipe5.decorate = "posypką";
+                recipe5.mix = "Wymieszaj";
+                recipe5.add = "wrzuć";
+                recipe5.time = 50;
+                recipe5.temp = 230;
+
+                Console.WriteLine("1. Składniki.\n2. Przygotowanie.\n3. Dekoracja.\n4. Menu Główne.");
+
+                bool c = int.TryParse(Console.ReadLine(), out int c1);
+                if (c)
+                {
+                    switch (c1)
+                    {
+                        case 1:
+
+                            Console.Clear();
+                            Console.WriteLine("\nSkładniki:");
+                            Console.WriteLine("\n{0}: {1} gram. {2}: {3} gram. {4}: {5} gram. {6}: {7} szt.", recipe5.FlourName, recipe5.FlourWeight, recipe5.ButterName, recipe5.ButterWeight, recipe5.SugarName, recipe5.SugarWeight, recipe5.EggName, recipe5.NumberOfEgg);
+                            Console.WriteLine("\n1. Cofnij.");
+                            Console.ReadKey();
+                            recipe55();
+                            break;
+                        case 2:
+                            Console.Clear();
+                            Console.WriteLine("\nDo miski {0}: {1}, {2} i {3} oraz rozbite {4}.", recipe5.add, recipe5.FlourName, recipe5.ButterName, recipe5.SugarName, recipe5.EggName);
+                            Console.WriteLine("\n{0} wszystkie składniki.", recipe5.mix);
+                            Console.WriteLine("\nPrzelej do foremki i wrzuć do piekarnika rozgrznego do {0} stopni na {1} minut.", recipe5.temp, recipe5.time);
+                            Console.WriteLine("\n1. Cofnij.");
+                            Console.ReadKey();
+                            recipe55();
+                            break;
+                        case 3:
+                            Console.Clear();
+                            Console.WriteLine("\nPo wychłodzeniu przystąp do dekoracji swojego {0}.", recipe5.name);
+                            Console.WriteLine("\nPosyp ciasto {0} swoją ulubioną {1}. SMACZNEGO :)", recipe5.name, recipe5.decorate);
+                            Console.WriteLine("\n1. Cofnij.");
+                            Console.ReadKey();
+                            recipe55();
+                            break;
+                        case 4:
+                            refresh();
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Program nie rozumie polecania. Wracam do menu :)");
+                    Console.ReadKey();
+                    refresh();
+                }
+
+            }
+            //Przepis na Nowo Dodane Ciasto.
+            static void recipe66()
+            {
+                Console.Clear();
+                Recipe recipe6;
+                recipe6.name = "Nowo Dodane Cisto";
+                Console.WriteLine("Wybrałeś przepis na {0} - powodzenia :)\n", recipe6.name);
+                recipe6.FlourName = "Mąka";
+                recipe6.ButterName = "Masło";
+                recipe6.SugarName = "Cukier";
+                recipe6.EggName = "Jajka";
+                recipe6.FlourWeight = 300;
+                recipe6.ButterWeight = 160;
+                recipe6.SugarWeight = 90;
+                recipe6.NumberOfEgg = 2;
+                recipe6.decorate = "posypką";
+                recipe6.mix = "Wymieszaj";
+                recipe6.add = "wrzuć";
+                recipe6.time = 90;
+                recipe6.temp = 180;
+
+                Console.WriteLine("1. Składniki.\n2. Przygotowanie.\n3. Dekoracja.\n4. Menu Główne.");
+
+                bool c = int.TryParse(Console.ReadLine(), out int c1);
+                if (c)
+                {
+                    switch (c1)
+                    {
+                        case 1:
+
+                            Console.Clear();
+                            Console.WriteLine("\nSkładniki:");
+                            Console.WriteLine("\n{0}: {1} gram. {2}: {3} gram. {4}: {5} gram. {6}: {7} szt.", recipe6.FlourName, recipe6.FlourWeight, recipe6.ButterName, recipe6.ButterWeight, recipe6.SugarName, recipe6.SugarWeight, recipe6.EggName, recipe6.NumberOfEgg);
+                            Console.WriteLine("\n1. Cofnij.");
+                            Console.ReadKey();
+                            recipe66();
+                            break;
+                        case 2:
+                            Console.Clear();
+                            Console.WriteLine("\nDo miski {0}: {1}, {2} i {3} oraz rozbite {4}.", recipe6.add, recipe6.FlourName, recipe6.ButterName, recipe6.SugarName, recipe6.EggName);
+                            Console.WriteLine("\n{0} wszystkie składniki.", recipe6.mix);
+                            Console.WriteLine("\nPrzelej do foremki i wrzuć do piekarnika rozgrznego do {0} stopni na {1} minut.", recipe6.temp, recipe6.time);
+                            Console.WriteLine("\n1. Cofnij.");
+                            Console.ReadKey();
+                            recipe66();
+                            break;
+                        case 3:
+                            Console.Clear();
+                            Console.WriteLine("\nPo wychłodzeniu przystąp do dekoracji swojego {0}.", recipe6.name);
+                            Console.WriteLine("\nPosyp ciasto {0} swoją ulubioną {1}. SMACZNEGO :)", recipe6.name, recipe6.decorate);
+                            Console.WriteLine("\n1. Cofnij.");
+                            Console.ReadKey();
+                            recipe66();
+                            break;
+                        case 4:
+                            refresh();
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Program nie rozumie polecania. Wracam do menu :)");
+                    Console.ReadKey();
+                    refresh();
+                }
+            }
+        }
+    }
+    public struct Recipe
+    {
+        public string name;
+        public string mix;
+        public string add;
+        public int time;
+        public int temp;
+        public string preparation;
+        public string decorate;
+        public string FlourName;
+        public double FlourWeight;
+        public string ButterName;
+        public double ButterWeight;
+        public string SugarName;
+        public double SugarWeight;
+        public string EggName;
+        public int NumberOfEgg;
+    }
+}
