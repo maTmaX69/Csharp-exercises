@@ -1,0 +1,224 @@
+using System;
+
+namespace Zadanie4
+{
+    public class Program
+    {
+        public struct Artykuly
+        {
+            public string nazwa;
+            public double cenaSztuka;
+            public double cenaKg;
+
+        }
+        public static void Main(string[] args)
+        {
+            Artykuly Ziemniaki;
+            Artykuly Marchewka;
+            Artykuly Keczup;
+            Artykuly Majonez;
+            Artykuly Makaron;
+
+            Ziemniaki.nazwa = "Ziemniaki";
+            Ziemniaki.cenaKg = 5;
+
+            Marchewka.nazwa = "Marchewka";
+            Marchewka.cenaKg = 3;
+
+            Keczup.nazwa = "Keczup";
+            Keczup.cenaSztuka = 5;
+
+            Majonez.nazwa = "Majonez";
+            Majonez.cenaSztuka = 10;
+
+            Makaron.nazwa = "Makaron";
+            Makaron.cenaSztuka = 8;
+
+            string wyswietl()
+            {
+                Console.WriteLine($"1.{Ziemniaki.nazwa}.\n" + $"2.{Marchewka.nazwa}.\n" + $"3.{Keczup.nazwa}.\n" + $"4.{Majonez.nazwa}.\n" + $"5.{Makaron.nazwa}.\n");
+                return "";
+            }
+
+            Console.WriteLine("-- Kasa sklepowa -- \nProszę wybrać artykuł: \n");
+
+            int art1 = 0;
+            int art2 = 0;
+            int art3 = 0;
+            int art4 = 0;
+            int art5 = 0;
+
+            wybor();
+
+            void wybor()
+            {
+                Console.WriteLine(wyswietl());
+                bool oper = int.TryParse(Console.ReadLine(), out int operation);
+                if (oper)
+                {
+                    switch (operation)
+                    {
+                        case 1:
+                            Console.Clear();
+                            Console.WriteLine("Ile kilogramów?");
+                            art1 = int.Parse(Console.ReadLine());
+                            Console.WriteLine("Wybrano {0} kg.", art1);
+                            kontynuacja();
+                            break;
+
+                        case 2:
+                            Console.Clear();
+                            Console.WriteLine("Ile kilogramów?");
+                            art2 = int.Parse(Console.ReadLine());
+                            Console.WriteLine("Wybrano {0} kg.", art2);
+                            kontynuacja();
+                            break;
+
+                        case 3:
+                            Console.Clear();
+                            Console.WriteLine("Ile sztuk?");
+                            art3 = int.Parse(Console.ReadLine());
+                            Console.WriteLine("Wybrano {0} szt.", art3);
+                            kontynuacja();
+                            break;
+                        case 4:
+                            Console.Clear();
+                            Console.WriteLine("Ile sztuk?");
+                            art4 = int.Parse(Console.ReadLine());
+                            Console.WriteLine("Wybrano {0} szt.", art4);
+                            kontynuacja();
+                            break;
+                        case 5:
+                            Console.Clear();
+                            Console.WriteLine("Ile sztuk?");
+                            art5 = int.Parse(Console.ReadLine());
+                            Console.WriteLine("Wybrano {0} szt.", art5);
+                            kontynuacja();
+                            break;
+                        default:
+                            Console.WriteLine("Wybrałeś opcję, której nie mogę zrealizować");
+                            Console.ReadKey();
+                            Console.Clear();
+                            wybor();
+                            break;
+                    }
+                }
+                else
+                {
+                    wybor();
+                }
+            }
+            string kontynuacja()
+            {
+                Console.WriteLine("1 - Dalej\n2 - Zaplac");
+                int n = int.Parse(Console.ReadLine());
+                switch (n)
+                {
+                    case 1:
+                        Console.Clear();
+                        wybor();
+                        break;
+
+                    case 2:
+                        Console.Clear();
+                        zaplac();
+                        Console.ReadKey();
+                        break;
+                }
+                return "";
+            }
+
+            string odNowa()
+
+            {
+                Console.WriteLine("1 - Nowy Klient.\n2 - Wyjście ze sklepu.");
+                int nowy = int.Parse(Console.ReadLine());
+                switch (nowy)
+                {
+                    case 1:
+                        Console.Clear();
+                        Console.WriteLine("-- Kasa sklepowa -- \nProszę wybrać artykuł: \n");
+                        wybor();
+                        break;
+
+                    case 2:
+                        Environment.Exit(0);
+                        break;
+                }
+                return "";
+            }
+
+            void zaplac()
+            {
+                double total;
+                double w1 = Ziemniaki.cenaKg * art1;
+                string w11 = Ziemniaki.nazwa;
+                double w2 = Marchewka.cenaKg * art2;
+                string w22 = Marchewka.nazwa;
+                double w3 = Keczup.cenaSztuka * art3;
+                string w33 = Keczup.nazwa;
+                double w4 = Majonez.cenaSztuka * art4;
+                string w44 = Majonez.nazwa;
+                double w5 = Makaron.cenaSztuka * art5;
+                string w55 = Makaron.nazwa;
+                if (art1 != 0 || art2 != 0 || art3 != 0 || art4 != 0 || art5 != 0)
+                {
+                    total = w1 + w2 + w3 + w4 + w5;
+                    Console.WriteLine("PARAGON\n");
+                    if (art1 == 0)
+                    {
+                        Console.Write("");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Kupiłeś {0} - {1} KG za {2} złotych.", w11, art1, w1);
+                    }
+                    if (art2 == 0)
+                    {
+                        Console.Write("");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Kupiłeś {0} - {1} KG za {2} złotych.", w22, art2, w2);
+                    }
+                    if (art3 == 0)
+                    {
+                        Console.Write("");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Kupiłeś {0} {1}/y za {2} złotych.", art3, w33, w3);
+                    }
+                    if (art4 == 0)
+                    {
+                        Console.Write("");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Kupiłeś {0} {1}/y za {2} złotych.", art4, w44, w4);
+                    }
+                    if (art5 == 0)
+                    {
+                        Console.Write("");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Kupiłeś {0} {1}/y za {2} złotych.", art5, w55, w5);
+                    }
+                    Console.WriteLine("\nLacznie do zapłaty: {0} złotych.\n", total);
+                    w1 = 0; art1 = 0;
+                    w2 = 0; art2 = 0;
+                    w3 = 0; art3 = 0;
+                    w4 = 0; art4 = 0;
+                    w5 = 0; art5 = 0;
+
+                    odNowa();
+                }
+                else
+                {
+                    Console.WriteLine("Błąd.");
+                }
+            }
+        }
+    }
+}
