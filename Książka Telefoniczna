@@ -1,0 +1,129 @@
+using System;
+using System.Collections.Generic;
+
+namespace Slowniki
+{
+    static class Program
+    {
+        public static SortedDictionary<string, string> dane = new SortedDictionary<string, string>
+            {
+               { "542342342", "Kowalski Tomek"},
+               { "634324234", "Piotrkowski Jacek"},
+               { "523432423", "Tomasik Magda"},
+               { "543286785", "Tomaszewska Klaudia"},
+               { "545634534", "Kapucyn Piotr"},
+               { "876765546", "Prorocka Iwona"},
+               { "754454524", "Oswiecimski Krystian"},
+               { "754865666", "Jagielonska Maria"},
+               { "567833345", "Mlotkiewicz Wojtek"},
+               { "534534789", "Walasik Kinga"}
+            };
+
+        static void Main(string[] args)
+        {
+            ConsoleKeyInfo KeyInfo;
+
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("☎ Ksiazka telefoniczna ☎\n");
+                Console.WriteLine("Dostępne opcje:\n");
+                Console.WriteLine("[w] - Wyswietl cala ksiazke.");
+                Console.WriteLine("[s] - Szukaj po nazwisku i imieniu.");
+                Console.WriteLine("[a] - Szukaj po numerze telefonu.");
+                Console.WriteLine("[d] - Dodaj nowy wpis.");
+                Console.WriteLine("[x] - Zamknij program.");
+
+                KeyInfo = Console.ReadKey();
+
+                if (KeyInfo.Key == ConsoleKey.W)
+                {
+                    Console.Clear();
+                    Console.WriteLine("☎ Ksiazka telefoniczna ☎\n");
+
+                    if (dane.Count == 0)
+                    {
+                        Console.WriteLine("Brak Pozycji");
+                    }
+                    else
+                    {
+                        foreach (KeyValuePair<string, string> product in dane)
+                        {
+                            Console.WriteLine($"{product.Key} - {product.Value}");
+                        }
+                    }
+
+                    Console.ReadKey();
+                }
+
+                if (KeyInfo.Key == ConsoleKey.S)
+                {
+                    Console.Clear();
+                    Console.WriteLine("☎ Szukaj po nazwisku i imieniu ☎");
+                    Console.WriteLine("Podaj Nazwisko i Imię:");
+                    string NazwiskoImie = Console.ReadLine();
+
+                    if (SzukajKlucz(dane, NazwiskoImie) != null)
+                    {
+                        string key = SzukajKlucz(dane, NazwiskoImie);
+                        Console.WriteLine($"Numer telefonu dla uzytkownika: {NazwiskoImie} - {key}\n");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Nie odnaleziono osoby: {NazwiskoImie}");
+                    }
+                    Console.ReadLine();
+
+                }
+
+                if (KeyInfo.Key == ConsoleKey.A)
+                {
+                    Console.Clear();
+
+                    Console.WriteLine("☎ Szukaj po numerze telefonu ☎");
+                    Console.WriteLine("Podaj numer telefonu:");
+                    string Numer = Console.ReadLine();
+                    if (dane.TryGetValue(Numer, out string Osoba))
+                    {
+                        Console.WriteLine($"Numer uzytkownika: {Osoba}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Nie znaleziono takiego numeru w bazie.");
+                    }
+
+                    Console.ReadKey();
+                }
+
+                if (KeyInfo.Key == ConsoleKey.D)
+                {
+                    Console.Clear();
+                    Console.WriteLine("☎ Dodaj nowy wpis ☎");
+                    Console.WriteLine("Podaj numer telefonu");
+                    string Numer = Console.ReadLine();
+                    Console.WriteLine("Podaj Imie");
+                    string NazwiskoImie = Console.ReadLine();
+                    Console.WriteLine("Podaj Nazwisko");
+                    NazwiskoImie = Console.ReadLine() + " " + NazwiskoImie;
+                    dane.Add(Numer, NazwiskoImie);
+                }
+
+            }
+            while (KeyInfo.Key != ConsoleKey.X);
+
+        }
+        public static T SzukajKlucz<T, W>(this SortedDictionary<T, W> numery, W Wartosc)
+        {
+            T key = default;
+            foreach (KeyValuePair<T, W> pair in numery)
+            {
+                if (EqualityComparer<W>.Default.Equals(pair.Value, Wartosc))
+                {
+                    key = pair.Key;
+                    break;
+                }
+            }
+            return key;
+        }
+    }
+}
