@@ -1,0 +1,81 @@
+class Zadanie8
+{
+    static int MinDystans(int[] dist, bool[] sptSet, int V)
+    {
+        int min = int.MaxValue, minIndex = -1;
+
+        for (int v = 0; v < V; v++)
+        {
+            if (sptSet[v] == false && dist[v] <= min)
+            {
+                min = dist[v];
+                minIndex = v;
+            }
+        }
+
+        return minIndex;
+    }
+
+    static void DijkstraAlgorytm(int[,] graph, int src, int V)
+    {
+        int[] dist = new int[V];
+        bool[] sptSet = new bool[V];
+
+        for (int i = 0; i < V; i++)
+        {
+            dist[i] = int.MaxValue;
+            sptSet[i] = false;
+        }
+
+        dist[src] = 0;
+
+        for (int count = 0; count < V - 1; count++)
+        {
+            int u = MinDystans(dist, sptSet, V);
+
+            sptSet[u] = true;
+
+            for (int v = 0; v < V; v++)
+            {
+                if (!sptSet[v] && graph[u, v] != 0 && dist[u] != int.MaxValue && dist[u] + graph[u, v] < dist[v])
+                {
+                    dist[v] = dist[u] + graph[u, v];
+                }
+            }
+        }
+
+        Console.WriteLine("Odleglosc wierzcholka od zrodla:\n");
+        for (int i = 0; i < V; i++)
+        {
+            Console.WriteLine(i + "\t-\t" + dist[i]);
+            Console.ReadKey();
+        }
+    }
+
+    public static void Main(string[] args)
+    {
+        int[,] graph = {
+
+                { 0, 4, 0, 0, 0, 0, 0, 8, 0 },
+
+                { 4, 0, 8, 0, 0, 0, 0, 11, 0 },
+
+                { 0, 8, 0, 7, 0, 4, 4, 0, 2 },
+
+                { 0, 0, 7, 0, 9, 14, 0, 0, 0 },
+
+                { 0, 0, 0, 9, 0, 10, 0, 0, 0 },
+
+                { 0, 0, 3, 0, 10, 0, 2, 0, 0 },
+
+                { 0, 0, 0, 14, 0, 2, 0, 1, 6 },
+
+                { 8, 11, 0, 0, 4, 0, 1, 0, 7 },
+
+                { 0, 0, 2, 0, 0, 0, 6, 7, 0 }
+            };
+
+        int V = graph.GetLength(0);
+        DijkstraAlgorytm(graph, 0, V);
+    }
+}
