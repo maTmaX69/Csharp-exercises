@@ -1,0 +1,12 @@
+using System.Linq.Expressions;
+
+class Zadanie7
+{
+    static void Main(string[] args)
+    {
+        var a = 10;
+        Expression<Func<int>> sum = () => 1 + a + 3 + 4;
+        Func<int> wynik = sum.Compile();
+        Console.WriteLine(wynik());
+    }
+}
