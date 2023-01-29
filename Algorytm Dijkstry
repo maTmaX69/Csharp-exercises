@@ -1,24 +1,36 @@
+using System;
+
 class Zadanie8
 {
-    static int MinDystans(int[] dist, bool[] sptSet, int V)
+    static int V = 9;
+    int Najkrotszy(int[] dist, bool[] sptSet)
     {
-        int min = int.MaxValue, minIndex = -1;
+        int min = int.MaxValue, min_index = -1;
 
         for (int v = 0; v < V; v++)
-        {
             if (sptSet[v] == false && dist[v] <= min)
             {
                 min = dist[v];
-                minIndex = v;
+                min_index = v;
             }
-        }
-
-        return minIndex;
+        return min_index;
     }
 
-    static void DijkstraAlgorytm(int[,] graph, int src, int V)
+    void Odpowiedz(int[] dist)
     {
-        int[] dist = new int[V];
+        Console.WriteLine("Rozwiazanie zadania:\n");
+        Console.Write("Wierzcholek \t\t\t Dystans \n\n");
+        for (int i = 0; i < V; i++)
+            Console.Write(i + " \t\t -\t \t " + dist[i] + "\n");
+        Console.WriteLine("\nNaciśnij dowolny klawisz by zakonczyc.");
+        Console.ReadKey();
+    }
+
+    void Dijkstra(int[,] graph, int src)
+    {
+        int[] dist
+            = new int[V];
+
         bool[] sptSet = new bool[V];
 
         for (int i = 0; i < V; i++)
@@ -31,28 +43,22 @@ class Zadanie8
 
         for (int count = 0; count < V - 1; count++)
         {
-            int u = MinDystans(dist, sptSet, V);
+
+            int u = Najkrotszy(dist, sptSet);
 
             sptSet[u] = true;
 
             for (int v = 0; v < V; v++)
-            {
-                if (!sptSet[v] && graph[u, v] != 0 && dist[u] != int.MaxValue && dist[u] + graph[u, v] < dist[v])
-                {
-                    dist[v] = dist[u] + graph[u, v];
-                }
-            }
-        }
 
-        Console.WriteLine("Odleglosc wierzcholka od zrodla:\n");
-        for (int i = 0; i < V; i++)
-        {
-            Console.WriteLine(i + "\t-\t" + dist[i]);
-            Console.ReadKey();
+                if (!sptSet[v] && graph[u, v] != 0
+                    && dist[u] != int.MaxValue
+                    && dist[u] + graph[u, v] < dist[v])
+                    dist[v] = dist[u] + graph[u, v];
         }
+        Odpowiedz(dist);
     }
 
-    public static void Main(string[] args)
+    public static void Main()
     {
         int[,] graph = {
 
@@ -73,9 +79,9 @@ class Zadanie8
                 { 8, 11, 0, 0, 4, 0, 1, 0, 7 },
 
                 { 0, 0, 2, 0, 0, 0, 6, 7, 0 }
-            };
 
-        int V = graph.GetLength(0);
-        DijkstraAlgorytm(graph, 0, V);
+            };
+        Zadanie8 e = new Zadanie8();
+        e.Dijkstra(graph, 0);
     }
 }
